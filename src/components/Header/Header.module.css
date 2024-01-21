@@ -1,0 +1,18 @@
+.headerContainer {
+    background-color: #ff4500;
+    display: flex;
+    position: relative;
+    width: 100%;
+    justify-content: center;
+}
+
+.redditLogo {
+    height: 40px;
+    position: absolute;
+    left: 1%;
+    top: 35%;
+}
+
+.scootsLogo {
+    height: 75px;
+}
