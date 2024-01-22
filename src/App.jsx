@@ -1,12 +1,12 @@
 import React from 'react'
 import Header from './components/header/header'
-import SearchBar from './components/SearchBar/SearchBar'
+import Explore from './features/Explore/Expore'
 
 export default function App() {
   return (
     <>
       <Header />
-      <SearchBar />
+      <Explore />
     </>
   )
 }

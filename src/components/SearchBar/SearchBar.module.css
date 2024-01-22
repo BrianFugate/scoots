@@ -1,0 +1,18 @@
+.outerDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: solid #80808044;
+}
+
+.form {
+    flex-basis: 95%;
+    display: flex;
+}
+
+.searchBox {
+    width: 80%;
+    margin: 2vh auto;
+    border-radius: 8px;
+    border-color: #80808080;
+}

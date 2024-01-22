@@ -1,0 +1,47 @@
+button, input {
+    font-size: 1.5em;
+}
+
+@media (orientation: landscape) {
+    .searchBar {
+        width: 60%;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 1300px) {
+        button, input {
+            font-size: 1.25em;
+        }
+    }
+
+    @media screen and (max-width: 1050px) {
+        .searchBar {
+            width: 75%;
+        }
+    }
+}
+
+@media (orientation: portrait) {
+    .searchBar {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    @media screen and (max-width: 768px) {
+        button, input {
+            font-size: 1em;
+        }
+    }
+
+    @media screen and (max-width: 535px) {
+        button, input {
+            font-size: 0.7em;
+        }
+    }
+
+    @media screen and (max-width: 375px) {
+        button, input {
+            font-size: 0.5em;
+        }
+    }
+}
