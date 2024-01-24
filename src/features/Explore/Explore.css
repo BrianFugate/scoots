@@ -1,46 +1,63 @@
-button, input {
-    font-size: 1.5em;
+.postsListOuterDiv {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: solid #80808044;
+}
+
+.searchTerm {
+    flex-basis: 100%;
+    font-size: 1em;
+    margin: 0.5em;
 }
 
 @media (orientation: landscape) {
-    .searchBar {
+    .exploreDiv {
         width: 60%;
         margin: 0 auto;
+        font-size: 1.5em;
+    }
+
+    @media screen and (max-width: 1500px) {
+        .exploreDiv {
+            font-size: 1.35em;
+        }
     }
 
     @media screen and (max-width: 1300px) {
-        button, input {
+        .exploreDiv {
             font-size: 1.25em;
         }
     }
 
     @media screen and (max-width: 1050px) {
-        .searchBar {
+        .exploreDiv {
             width: 75%;
         }
     }
 }
 
 @media (orientation: portrait) {
-    .searchBar {
+    .exploreDiv {
         width: 100%;
         margin: 0 auto;
+        font-size: 1.5em;
     }
 
     @media screen and (max-width: 768px) {
-        button, input {
+        .exploreDiv {
             font-size: 1em;
         }
     }
 
     @media screen and (max-width: 535px) {
-        button, input {
+        .exploreDiv {
             font-size: 0.7em;
         }
     }
 
     @media screen and (max-width: 375px) {
-        button, input {
+        .exploreDiv {
             font-size: 0.5em;
         }
     }
