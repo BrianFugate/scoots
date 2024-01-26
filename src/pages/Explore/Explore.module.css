@@ -1,8 +1,12 @@
+.exploreDiv {
+    margin: 0 auto;
+    border: solid #80808044;
+}
+
 .postsListOuterDiv {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: solid #80808044;
 }
 
 .searchTerm {
@@ -14,20 +18,7 @@
 @media (orientation: landscape) {
     .exploreDiv {
         width: 60%;
-        margin: 0 auto;
         font-size: 1.5vw;
-    }
-
-    @media screen and (max-width: 1500px) {
-        .exploreDiv {
-            font-size: 1.35em;
-        }
-    }
-
-    @media screen and (max-width: 1300px) {
-        .exploreDiv {
-            font-size: 1.25em;
-        }
     }
 
     @media screen and (max-width: 1050px) {
@@ -40,7 +31,6 @@
 @media (orientation: portrait) {
     .exploreDiv {
         width: 100%;
-        margin: 0 auto;
         font-size: 2.5vw;
     }
 }

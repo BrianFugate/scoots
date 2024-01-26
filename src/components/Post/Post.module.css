@@ -2,7 +2,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: solid #80808044;
+    border-top: solid #80808044;
     width: 100%;
 }
 

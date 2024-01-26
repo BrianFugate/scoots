@@ -1,18 +1,18 @@
 import React from "react";
-import "./Explore.css";
+import styles from "./Explore.module.css";
 import SearchBar from "../../components/SearchBar/SearchBar.jsx";
 import PostsList from "../../components/PostsList/PostsList.jsx";
 
 export default function Explore() {
     return (
-        <div className='exploreDiv'>
-            <div className='searchBar' >
+        <div className={styles.exploreDiv}>
+            <div>
                 <SearchBar />
             </div>
-            <div className='postsListOuterDiv'>
-                <h1 className='searchTerm'>Search Term</h1>
+            <div className={styles.postsListOuterDiv}>
+                <h1 className={styles.searchTerm}>Search Term</h1>
                 <PostsList />
             </div>
         </div>
-    );cd 
+    );
 };
