@@ -14,6 +14,10 @@
     top: 50%;
 }
 
+.scootsLink {
+    display: flex;
+}
+
 @media (orientation: portrait) {
     .headerContainer {
         height: 5vh;

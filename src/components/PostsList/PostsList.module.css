@@ -1,48 +1,4 @@
 .outerDiv {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    border: solid #80808044;
-    width: 100%;
-}
-
-.headingDiv {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.infoDiv {
-    display: flex;
-    flex-direction: column;    
-}
-
-.userDiv {
-    display: flex;
-    align-items: center;
-}
-
-.avatar {
-    font-size: 1.5em;
-    margin: 0.2em 0.5em 0 0.5em;
-}
-
-.title {
-    margin-left: 0.5em;
-    font-size: 1.1em;
-}
-
-.iconDiv {
-    display: flex;
-    justify-content: space-around;
-}
-
-.icon {
-    font-size: 2.0em;
-    margin: 0.1em 0.5em;
-}
-
-.fakePost {
-    width: 95%;
 }
