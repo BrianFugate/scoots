@@ -1,28 +1,27 @@
 import React from "react";
 import styles from "./Post.module.css";
-import fakePost from "../../assets/fake-post.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
-import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
-export default function Post() {
+export default function Post(props) {
     return (
         <div className={styles.outerDiv}>
             <div className={styles.headingDiv}>
                 <div className={styles.infoDiv}>
                     <div className={styles.userDiv}>
-                        <FontAwesomeIcon className={styles.avatar} icon={faUserSecret} />
-                        <p className={styles.title}>Username</p>
+                        <p className={styles.title}>u/{props.author}</p>
+                        <p className={styles.title}>r/{props.sub}</p>
                     </div>
-                    <Link to='/ViewPost' className={styles.title}>Post Title: This is where the title of the post will be</Link>
+                    <Link to={`/ViewPost/${props.id}`} className={styles.title}>{props.title}</Link>
                 </div>
                 <div className={styles.iconDiv}>
                     <FontAwesomeIcon className={styles.icon} icon={faComments} />
                     <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
                 </div>
             </div>
-            <img className={styles.fakePost} src={fakePost} alt='Fake post image' />
+            <img style={props.preview === null ? {display: 'none'} : {display: 'block'}} className={styles.fakePost} src={props.preview} alt='Post image missing' />
+            <p style={props.text === null ? {display: 'none'} : {display: 'block'}}>{props.text}</p>
         </div>
     );
 };

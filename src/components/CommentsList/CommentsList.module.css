@@ -1,0 +1,18 @@
+.line1 {
+    position: absolute;
+    border-left: solid #80808044;
+    left: 0.5em;
+    height: 100%;
+    z-index: -1;
+}
+
+.commentDiv {
+    display: flex;
+    overflow-wrap: anywhere;
+}
+
+.comment {
+    background-color: white;
+    font-size: 0.9em;
+    padding: 0.5em;
+}

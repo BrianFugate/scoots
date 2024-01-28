@@ -5,6 +5,7 @@
 
   color: black;
   background-color: white;
+  box-sizing: border-box;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,8 +15,9 @@
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  height: 100svh;
+  width: 100svw;
+  overflow: hidden;
 }
 
 p {

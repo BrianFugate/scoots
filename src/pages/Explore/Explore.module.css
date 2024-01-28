@@ -1,6 +1,8 @@
 .exploreDiv {
     margin: 0 auto;
     border: solid #80808044;
+    height: 92.5svh;
+    overflow-y: auto;
 }
 
 .postsListOuterDiv {
