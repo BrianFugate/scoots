@@ -1,16 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./ViewPost.module.css";
 import SearchBar from "../../components/Search/Search.jsx";
 import Post from "../../components/Post/Post.jsx";
 import { useParams } from "react-router-dom";
 import CommentsList from "../../components/CommentsList/CommentsList.jsx";
-import { useSelector } from "react-redux";
-import { selectViewPost } from "./viewPostSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+import { selectViewPost, setCurrApiData } from "./viewPostSlice.js";
+import Reddit from "../../api/Reddit/Reddit.js";
 
 
 export default function ViewPost() {
-    const { id } = useParams();
     const currApi = useSelector(selectViewPost);
+    const dispatch = useDispatch();
+    const { id } = useParams();
+
+    useEffect(() => {
+        async function apiCall() {
+            const redditData = await Reddit.getComments(id);
+            console.log(redditData);
+            dispatch(setCurrApiData(redditData));
+        };
+        apiCall();
+    }, [id]);
+
     const post = currApi.currApiData[0].data.children[0];
 
     return (

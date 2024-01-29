@@ -29,18 +29,32 @@ const Reddit = {
         return await response.json();
       },
 
-    async test() {
+    async getPosts(endpoint) {
         if (token.expireTime <= Date.now() - 5000) {
             const tokenResponse = await this.getToken();
             token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
         };
 
-        const response = await fetch('https://oauth.reddit.com/best', {
+        const response = await fetch('https://oauth.reddit.com' + endpoint + '?raw_json=1', {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token.token },
           });
         
           return await response.json();
+    },
+
+    async getComments(post) {
+      if (token.expireTime <= Date.now() - 5000) {
+          const tokenResponse = await this.getToken();
+          token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
+      };
+
+      const response = await fetch(`https://oauth.reddit.com/comments/${post}?raw_json=1`, {
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer ' + token.token },
+        });
+      
+        return await response.json();
     }
 };
 

@@ -1,18 +1,19 @@
 import React from "react";
 import styles from "./CommentsList.module.css";
 import { Util } from "../../utilities/Util.js";
-import comments from "../../api/Reddit/comments.json";
+import { useSelector } from "react-redux";
+import { selectViewPost } from "../../pages/ViewPost/viewPostSlice.js";
 
 
 // Recursive function to iterate through comment data and put them
 // in the correct hierarchy for display
-function iterateComments(arr) {
+function iterateComments(arr, id) {
     return arr.flatMap((element) => {
         let moreComments = [];
         const aTag = (
             <div className={styles.commentDiv} key={element.data.id}>
                 <a
-                    href={'https://redd.it/' + comments[0].data.children[0].data.id}
+                    href={'https://redd.it/' + id}
                     target='_blank'
                     className={styles.comment}
                     style={{ marginLeft: `${element.data.depth}em` }}
@@ -28,7 +29,7 @@ function iterateComments(arr) {
 
         // If current element has a child comment call iterateComments recursively
         if (element?.data?.replies?.data?.children !== undefined) {
-            moreComments = iterateComments(element.data.replies.data.children);
+            moreComments = iterateComments(element.data.replies.data.children, id);
         }
 
         // Return link to Reddit if element is not a comment
@@ -41,8 +42,8 @@ function iterateComments(arr) {
 };
 
 // Function to remove repeated links back to Reddit from comments
-function parseComments(arr) {
-    const fatArr = iterateComments(arr);
+function parseComments(arr, id) {
+    const fatArr = iterateComments(arr, id);
     const parsedFatArr = JSON.parse(Util.stringify(fatArr));
     const slimArr = [];
 
@@ -56,9 +57,12 @@ function parseComments(arr) {
 };
 
 export default function CommentsList() {
+    const comments = useSelector(selectViewPost).currApiData;
+    const id = comments[0].data.children[0].data.id;
+
     return (
         <>
-            {parseComments(comments[1].data.children)}
+            {parseComments(comments[1].data.children, id)}
             {/*<div className={styles.line1}></div>*/}
         </>
     );
