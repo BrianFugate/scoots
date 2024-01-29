@@ -1,13 +1,16 @@
 import React from "react";
-import styles from "./PostsList.module.css";
+import styles from "./Posts.module.css";
 import Post from "../Post/Post";
-import postData from "../../api/Reddit/best.json";
+import { selectPosts } from "./postsSlice.js";
+import { useSelector } from "react-redux";
 
 
 export default function PostsList() {
+    const postData = useSelector(selectPosts);
+
     return (
         <div className={styles.outerDiv}>
-            {postData.data.children.map((post) => 
+            {postData.apiData.data.children.map((post) => 
                 <Post key={post.data.id}
                     author={post.data.author}
                     sub={post.data.subreddit}

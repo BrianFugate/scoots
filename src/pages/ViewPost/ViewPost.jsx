@@ -1,15 +1,17 @@
 import React from "react";
 import styles from "./ViewPost.module.css";
-import SearchBar from "../../components/SearchBar/SearchBar.jsx";
+import SearchBar from "../../components/Search/Search.jsx";
 import Post from "../../components/Post/Post.jsx";
 import { useParams } from "react-router-dom";
-import comments from "../../api/Reddit/comments.json"
 import CommentsList from "../../components/CommentsList/CommentsList.jsx";
+import { useSelector } from "react-redux";
+import { selectViewPost } from "./viewPostSlice.js";
 
 
 export default function ViewPost() {
     const { id } = useParams();
-    const post = comments[0].data.children[0];
+    const currApi = useSelector(selectViewPost);
+    const post = currApi.currApiData[0].data.children[0];
 
     return (
         <>

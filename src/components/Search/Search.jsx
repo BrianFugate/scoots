@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-import styles from "./SearchBar.module.css";
-import CategoryBar from "../CategoryBar/CategoryBar";
+import styles from "./Search.module.css";
+import CategoryBar from "../Category/Category";
+import { useDispatch, useSelector } from "react-redux";
+import { changeText, clearText, selectSearch } from "./searchSlice.js";
 
 
 function SearchBar() {
-    const [searchText, setSearchText] = useState('');
+    const searchText = useSelector(selectSearch).searchText;
+    const dispatch = useDispatch();
 
     return (
         <div className={styles.outerDiv}>
@@ -14,7 +17,7 @@ function SearchBar() {
                     placeholder='Search' 
                     value={searchText} 
                     className={styles.searchBox}
-                    onChange={(event) => setSearchText(event.target.value)} />
+                    onChange={(event) => dispatch(changeText(event.target.value))} />
             </form>
             <CategoryBar /> 
         </div>
