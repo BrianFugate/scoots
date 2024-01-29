@@ -1,25 +1,8 @@
 import React from "react";
 import styles from "./CommentsList.module.css";
-import smallComments from "../../api/Reddit/smallComments.json";
+import { Util } from "../../utilities/Util.js";
+import comments from "../../api/Reddit/comments.json";
 
-
-// temporary function for debugging, will be removed
-function stringify(obj) {
-    let cache = [];
-    let str = JSON.stringify(obj, function(key, value) {
-      if (typeof value === "object" && value !== null) {
-        if (cache.indexOf(value) !== -1) {
-          // Circular reference found, discard key
-          return;
-        }
-        // Store value in our collection
-        cache.push(value);
-      }
-      return value;
-    });
-    cache = null; // reset the cache
-    return str;
-}
 
 // Recursive function to iterate through comment data and put them
 // in the correct hierarchy for display
@@ -29,7 +12,7 @@ function iterateComments(arr) {
         const aTag = (
             <div className={styles.commentDiv} key={element.data.id}>
                 <a
-                    href={'https://redd.it/' + '1abr3ky'}
+                    href={'https://redd.it/' + comments[0].data.children[0].data.id}
                     target='_blank'
                     className={styles.comment}
                     style={{ marginLeft: `${element.data.depth}em` }}
@@ -57,10 +40,25 @@ function iterateComments(arr) {
     });
 };
 
+// Function to remove repeated links back to Reddit from comments
+function parseComments(arr) {
+    const fatArr = iterateComments(arr);
+    const parsedFatArr = JSON.parse(Util.stringify(fatArr));
+    const slimArr = [];
+
+    for (let i = 0; i < fatArr.length; i++) {          
+        if (i === 0 || parsedFatArr[i].props.children.type === 'p' || parsedFatArr[i - 1].props.children.type !== 'a') {
+            slimArr.push(fatArr[i]);
+        };
+    };
+
+    return slimArr;
+};
+
 export default function CommentsList() {
     return (
         <>
-            {iterateComments(smallComments[1].data.children)}
+            {parseComments(comments[1].data.children)}
             {/*<div className={styles.line1}></div>*/}
         </>
     );
