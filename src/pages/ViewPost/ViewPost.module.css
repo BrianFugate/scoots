@@ -6,7 +6,7 @@
 .leftDiv {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
+    align-content: flex-start;
     flex: 1 1 50%;
     height: 100%;
     justify-content: center;
