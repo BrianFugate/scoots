@@ -54,7 +54,7 @@ const Reddit = {
           headers: { 'Authorization': 'Bearer ' + token.token },
         });
       
-        return await response.json();
+      return await response.json();
     }
 };
 

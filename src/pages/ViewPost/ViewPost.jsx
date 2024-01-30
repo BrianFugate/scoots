@@ -17,7 +17,6 @@ export default function ViewPost() {
     useEffect(() => {
         async function apiCall() {
             const redditData = await Reddit.getComments(id);
-            console.log(redditData);
             dispatch(setCurrApiData(redditData));
         };
         apiCall();
@@ -33,7 +32,7 @@ export default function ViewPost() {
                     <h1 className={styles.searchTerm}>Search Term</h1>
                     <Post key={post.data.id}
                         author={post.data.author}
-                        sub={post.data.subreddit}
+                        sub={post.data.subreddit_name_prefixed}
                         title={post.data.title}
                         preview={Object.hasOwn(post.data, 'preview') ? post.data.preview.images[0].source.url : null}
                         text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}

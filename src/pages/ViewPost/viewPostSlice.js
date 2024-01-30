@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import comments from "../../api/Reddit/comments.json"
+import comments from "../../api/Reddit/defaultComments.json"
 
 const initialState = {
     prevApiData: {},

@@ -25,4 +25,5 @@ dist-ssr
 
 # API sample files
 src/api/Reddit/*.json
+!src/api/Reddit/defaultComments.json
 src/api/Reddit/refreshData.js
