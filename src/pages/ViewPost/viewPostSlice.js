@@ -5,7 +5,7 @@ const initialState = {
     post: post,
     comments: [],
     moreComments: [], 
-    hasMore: true
+    hasMore: false
 }
 
 const viewPostSlice = createSlice({

@@ -10,7 +10,6 @@ export default function Explore() {
                 <Search />
             </div>
             <div className={styles.postsListOuterDiv}>
-                <h1 className={styles.searchTerm}>Search Term</h1>
                 <Posts />
             </div>
         </div>

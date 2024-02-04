@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import  { Reddit } from "../../api/Reddit/Reddit.js";
+import post from "../../api/Reddit/defaultPost.json"
 
 const initialState = {
-    apiData: await Reddit.getPosts('/best')
+    apiData: {data: {children: [post]}}
 };
 
 const postsSlice = createSlice ({
@@ -10,7 +10,7 @@ const postsSlice = createSlice ({
     initialState: initialState,
     reducers: {
         refreshApiData(state, action) {
-            return {apiData: action.payload};
+            return {...state, apiData: {...action.payload}};
         }
     }
 });

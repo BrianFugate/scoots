@@ -11,12 +11,6 @@
     justify-content: center;
 }
 
-.searchTerm {
-    flex-basis: 100%;
-    font-size: 1em;
-    margin: 0.5em;
-}
-
 @media (orientation: landscape) {
     .exploreDiv {
         width: 60%;
