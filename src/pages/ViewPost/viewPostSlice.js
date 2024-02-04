@@ -1,30 +1,45 @@
 import { createSlice } from "@reduxjs/toolkit";
-import comments from "../../api/Reddit/defaultComments.json"
+import post from "../../api/Reddit/defaultPost.json";
 
 const initialState = {
-    prevApiData: {},
-    currApiData: comments,
-    nextApiData: {}
+    post: post,
+    comments: [],
+    moreComments: [], 
+    hasMore: true
 }
 
 const viewPostSlice = createSlice({
     name: 'viewPost',
     initialState: initialState,
     reducers: {
-        setPrevApiData(state, action) {
-            return {prevApiData: action.payload};
+        setPost(state, action) {
+            return {...state, post: action.payload};
         },
 
-        setCurrApiData(state, action) {
-            return {currApiData: action.payload};
+        setComments(state, action) {
+            return {...state, comments: [...action.payload]};
         },
 
-        setNextApiData(state, action) {
-            return {nextApiData: action.payload};
+        addComments(state, action) {
+            return {...state, comments: [...state.comments, ...action.payload]};
+        },
+
+        setMoreComments(state, action) {
+            return {...state, moreComments: [...action.payload]};
+        },
+
+        trimMoreComments(state, action) {
+            const trimmed = state.moreComments.toSpliced(0, action.payload);
+
+            return {...state, moreComments: [...trimmed]};
+        },
+
+        setHasMore(state, action) {
+            return {...state, hasMore: action.payload};
         }
     }
 });
 
 export const selectViewPost = state => state.viewPost;
-export const { setPrevApiData, setCurrApiData, setNextApiData } = viewPostSlice.actions;
+export const { setPost, setComments, addComments, setMoreComments, trimMoreComments, setHasMore } = viewPostSlice.actions;
 export default viewPostSlice.reducer;

@@ -1,3 +1,5 @@
+import { Parser } from "../../utils/Parser.js";
+
 const clientId = import.meta.env.VITE_CLIENT_ID;
 let token = {token: 'invalidtoken', expireTime: 10};
 
@@ -54,8 +56,26 @@ const Reddit = {
           headers: { 'Authorization': 'Bearer ' + token.token },
         });
       
-      return await response.json();
+      const comments = await response.json();
+      const flatComments = Parser.flatten(comments[1].data.children);
+      comments[1].data.children.splice(0, Infinity, ...flatComments);
+
+      return comments;
+    },
+
+    async getMoreComments(post, comments) {
+      if (token.expireTime <= Date.now() - 5000) {
+          const tokenResponse = await this.getToken();
+          token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
+      };
+
+      const response = await fetch(`https://oauth.reddit.com/api/morechildren/?api_type=json&children=${comments}&depth=6&link_id=${post}&raw_json=1`, {
+          method: 'GET',
+          headers: { 'Authorization': 'Bearer ' + token.token },
+        });
+      
+        return await response.json();
     }
 };
 
-export default Reddit;
+export { Reddit };

@@ -1,43 +1,52 @@
 import React from "react";
 import styles from "./CommentsList.module.css";
-import { useSelector } from "react-redux";
-import { selectViewPost } from "../../pages/ViewPost/viewPostSlice.js";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { selectViewPost, setHasMore } from "../../pages/ViewPost/viewPostSlice.js";
+import { Reddit } from "../../api/Reddit/Reddit.js";
+import { addComments, trimMoreComments } from "../../pages/ViewPost/viewPostSlice.js";
 
-
-// Recursive function to iterate through comment data and put them
-// in the correct hierarchy for display
-function iterateComments(arr, id) {
-    return arr.flatMap((element) => {
-        let moreComments = [];
-        const pTag = (
-            <div className={styles.commentDiv} key={element.data.id}>
-                <p className={styles.comment} style={{ marginLeft: `${element.data.depth}em` }}>{element.data.body}</p>
-            </div>
-        )
-
-        // If current element has a child comment call iterateComments recursively
-        if (element?.data?.replies?.data?.children !== undefined) {
-            moreComments = iterateComments(element.data.replies.data.children, id);
-        }
-
-        // Return recursive data and next comment if it exists
-        if (element.data.body === undefined) {
-            return [...moreComments];
-        } else {
-            return [pTag, ...moreComments];
-        }
-    });
-};
 
 export default function CommentsList() {
-    const comments = useSelector(selectViewPost).currApiData;
-    const id = comments[0].data.children[0].data.id;
+    const comments = useSelector(selectViewPost);
+    const dispatch = useDispatch()
+    const { id } = useParams();
+
+    function iterateComments(arr) {
+        return arr.map((element) => {
+            if (element === undefined || element === null) return;
+            if (element.data.body === undefined) return;
+    
+            const pTag = (
+                <div className={styles.commentDiv} key={element.data.id}>
+                    <p className={styles.comment} style={{ marginLeft: `${element.data.depth}em` }}>{element.data.body}</p>
+                </div>
+            )
+    
+            return pTag;
+        });
+    };
+    
+    async function loadMore(arr) {
+        let length = 100;
+        
+        if (arr.length < 100) {
+            length = arr.length;
+            dispatch(setHasMore(false));
+        }
+  
+        const fetchArr = arr.slice(0, length - 1).toString();
+        const response = await Reddit.getMoreComments(comments.post.data.name, fetchArr);
+        dispatch(addComments(response.json.data.things));
+        dispatch(trimMoreComments(length));
+    
+    };
 
     return (
         <>
-            {iterateComments(comments[1].data.children, id)}
+            {iterateComments(comments.comments)}
             <div>
-                <a>Load more comments</a>
+                {comments.hasMore ? <button onClick={() => loadMore(comments.moreComments)}>Load more comments</button> : <></>}
                 <a
                     href={'https://redd.it/' + id}
                     target='_blank'

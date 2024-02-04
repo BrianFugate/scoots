@@ -2,27 +2,33 @@ import React, { useEffect } from "react";
 import styles from "./ViewPost.module.css";
 import SearchBar from "../../components/Search/Search.jsx";
 import Post from "../../components/Post/Post.jsx";
-import { useParams } from "react-router-dom";
 import CommentsList from "../../components/CommentsList/CommentsList.jsx";
+import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectViewPost, setCurrApiData } from "./viewPostSlice.js";
-import Reddit from "../../api/Reddit/Reddit.js";
+import { selectViewPost, setPost, setComments, setMoreComments, setHasMore } from "./viewPostSlice.js";
+import { Reddit } from "../../api/Reddit/Reddit.js";
 
 
 export default function ViewPost() {
-    const currApi = useSelector(selectViewPost);
+    const currPost = useSelector(selectViewPost);
     const dispatch = useDispatch();
     const { id } = useParams();
 
     useEffect(() => {
         async function apiCall() {
             const redditData = await Reddit.getComments(id);
-            dispatch(setCurrApiData(redditData));
+            dispatch(setPost(redditData[0].data.children[0]));
+            dispatch(setComments(redditData[1].data.children));
+            if (redditData[1]?.data?.children[redditData[1].data.children.length - 1]?.data?.children !== undefined) {
+                dispatch(setMoreComments(redditData[1].data.children[redditData[1].data.children.length - 1].data.children))
+                dispatch(setHasMore(true));
+            }
+            
         };
         apiCall();
     }, [id]);
 
-    const post = currApi.currApiData[0].data.children[0];
+    const post = currPost.post;
 
     return (
         <>

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Reddit from "../../api/Reddit/Reddit.js";
+import  { Reddit } from "../../api/Reddit/Reddit.js";
 
 const initialState = {
     apiData: await Reddit.getPosts('/best')
