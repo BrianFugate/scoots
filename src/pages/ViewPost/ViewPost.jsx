@@ -35,7 +35,6 @@ export default function ViewPost() {
             <div className={styles.viewPostDiv}>
                 <div className={styles.leftDiv}>
                     <SearchBar />
-                    <h1 className={styles.searchTerm}>Search Term</h1>
                     <Post key={post.data.id}
                         author={post.data.author}
                         sub={post.data.subreddit_name_prefixed}

@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    categories: ['Best', 'Hot', 'New', 'Random', 'Rising', 'Top'],
-    activeCategory: 'Best'
+    categories: ['Hot', 'New', 'Rising', 'Top', 'Arguable'],
+    activeCategory: 'Hot'
 };
 
 const categorySlice = createSlice ({

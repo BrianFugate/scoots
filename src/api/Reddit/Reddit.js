@@ -31,13 +31,13 @@ const Reddit = {
         return await response.json();
       },
 
-    async getPosts(endpoint) {
+      async getPosts(endpoint, args) {
         if (token.expireTime <= Date.now() - 5000) {
             const tokenResponse = await this.getToken();
             token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
         };
 
-        const response = await fetch('https://oauth.reddit.com' + endpoint + '?raw_json=1', {
+        const response = await fetch(`https://oauth.reddit.com/${endpoint}?raw_json=1${args}`, {
             method: 'GET',
             headers: { 'Authorization': 'Bearer ' + token.token },
           });
