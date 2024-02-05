@@ -11,10 +11,14 @@ const postsSlice = createSlice ({
     reducers: {
         refreshApiData(state, action) {
             return {...state, apiData: {...action.payload}};
+        }, 
+
+        resetInitialPost() {
+            return initialState;
         }
     }
 });
 
 export const selectPosts = state => state.posts;
-export const { refreshApiData } = postsSlice.actions;
+export const { refreshApiData, resetInitialPost } = postsSlice.actions;
 export default postsSlice.reducer;

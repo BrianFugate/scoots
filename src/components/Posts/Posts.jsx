@@ -5,7 +5,7 @@ import { selectPosts } from "./postsSlice.js";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCategory } from "../Category/categorySlice.js";
 import { selectSearch, clearText } from "../Search/searchSlice.js";
-import { refreshApiData } from "./postsSlice.js";
+import { refreshApiData, resetInitialPost } from "./postsSlice.js";
 import { Reddit } from "../../api/Reddit/Reddit.js";
 
 
@@ -18,6 +18,8 @@ export default function Posts() {
 
     useEffect(() => {
         async function apiCall() {
+            dispatch(resetInitialPost());
+
             let endpoint = activeCategory.toLowerCase();
             let args = '';
 

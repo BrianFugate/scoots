@@ -16,12 +16,7 @@ export default function CategoryBar() {
 
     function handleClick(category) {
         dispatch(setActive(category));
-
-        if (category === 'Random') {
-
-        } else {
-            navigate('/');
-        }
+        navigate('/');
     };
 
     return (

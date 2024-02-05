@@ -5,7 +5,7 @@ import Post from "../../components/Post/Post.jsx";
 import CommentsList from "../../components/CommentsList/CommentsList.jsx";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { selectViewPost, setPost, setComments, setMoreComments, setHasMore } from "./viewPostSlice.js";
+import { selectViewPost, setPost, setComments, setMoreComments, setHasMore, resetInitial } from "./viewPostSlice.js";
 import { Reddit } from "../../api/Reddit/Reddit.js";
 
 
@@ -16,6 +16,7 @@ export default function ViewPost() {
 
     useEffect(() => {
         async function apiCall() {
+            dispatch(resetInitial());
             const redditData = await Reddit.getComments(id);
             dispatch(setPost(redditData[0].data.children[0]));
             dispatch(setComments(redditData[1].data.children));

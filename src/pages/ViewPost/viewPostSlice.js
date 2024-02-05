@@ -36,10 +36,14 @@ const viewPostSlice = createSlice({
 
         setHasMore(state, action) {
             return {...state, hasMore: action.payload};
+        },
+        
+        resetInitial() {
+            return initialState;
         }
     }
 });
 
 export const selectViewPost = state => state.viewPost;
-export const { setPost, setComments, addComments, setMoreComments, trimMoreComments, setHasMore } = viewPostSlice.actions;
+export const { setPost, setComments, addComments, setMoreComments, trimMoreComments, setHasMore, resetInitial } = viewPostSlice.actions;
 export default viewPostSlice.reducer;
