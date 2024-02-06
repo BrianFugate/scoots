@@ -18,8 +18,9 @@ export default function CommentsList() {
             if (element.data.body === undefined) return;
     
             const pTag = (
-                <div className={styles.commentDiv} key={element.data.id}>
-                    <p className={styles.comment} style={{ marginLeft: `${element.data.depth}em` }}>{element.data.body}</p>
+                <div className={styles.commentDiv} key={element.data.id} style={{ marginLeft: `${element.data.depth * 1.2}em` }}>
+                    <p className={styles.user}>u/{element.data.author}</p>
+                    <p className={styles.comment}>{element.data.body}</p>
                 </div>
             )
     

@@ -15,13 +15,15 @@
 
 .infoDiv {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;   
+    width: 100%; 
 }
 
 .userDiv {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    font-size: 0.8em;
 }
 
 .avatar {
@@ -31,7 +33,8 @@
 
 .title {
     margin-left: 0.5em;
-    font-size: 1.1em;
+    font-size: 1em;
+    overflow-wrap: anywhere;
 }
 
 .iconDiv {
@@ -45,5 +48,18 @@
 }
 
 .postImg {
-    width: 95%;
+    max-width: 95%;
+    max-height: 80svh;
+    object-fit: contain;
+    margin-bottom: 0.5em;
+}
+
+p {
+    display: block;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin: 1em 0.5em;
+    overflow-wrap: anywhere;
 }

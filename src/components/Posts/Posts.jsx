@@ -42,7 +42,7 @@ export default function Posts() {
             {postData.apiData.data.children.map((post) =>
                 <Post key={post.data.id}
                     author={post.data.author}
-                    sub={post.data.subreddit}
+                    sub={post.data.subreddit_name_prefixed}
                     title={post.data.title}
                     preview={Object.hasOwn(post.data, 'preview') ? post.data.preview.images[0].source.url : null}
                     text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}

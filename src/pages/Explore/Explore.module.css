@@ -13,8 +13,8 @@
 
 @media (orientation: landscape) {
     .exploreDiv {
-        width: 60%;
-        font-size: 1.5vw;
+        width: 50%;
+        font-size: 1.2vw;
     }
 
     @media screen and (max-width: 1050px) {

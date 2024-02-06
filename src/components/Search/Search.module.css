@@ -12,8 +12,8 @@
 
 .searchBox {
     width: 80%;
-    margin: 2vh auto;
+    margin: 1vh auto;
     border-radius: 8px;
     border-color: #80808080;
-    font-size: 1.25em;
+    font-size: 1em;
 }

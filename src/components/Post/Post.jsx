@@ -14,13 +14,15 @@ export default function Post(props) {
             <div className={styles.headingDiv}>
                 <div className={styles.infoDiv}>
                     <div className={styles.userDiv}>
-                        <p className={styles.title}>u/{props.author}</p>
-                        <p className={styles.title}>{props.sub}</p>
+                        <div className={styles.title}>u/{props.author}</div>
+                        <div className={styles.title}>{props.sub}</div>
                     </div>
                     <Link to={`/ViewPost/${props.id}`} className={styles.title}>{props.title}</Link>
                 </div>
                 <div className={styles.iconDiv}>
-                    <FontAwesomeIcon className={styles.icon} icon={faComments} />
+                    <Link to={`/ViewPost/${props.id}`} className={styles.title}>
+                        <FontAwesomeIcon className={styles.icon} icon={faComments} />
+                    </Link>                    
                     <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
                 </div>
             </div>
