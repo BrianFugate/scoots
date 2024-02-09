@@ -44,7 +44,7 @@ export default function ViewPost() {
                         text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}
                         id={post.data.id} />
                 </div>
-                <div className={styles.rightDiv}>
+                <div className={styles.rightDiv} id='rightDiv'>
                     <CommentsList />
                 </div>
             </div>            
