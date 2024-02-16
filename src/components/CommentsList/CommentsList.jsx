@@ -11,30 +11,32 @@ export default function CommentsList() {
     const comments = useSelector(selectViewPost);
     const dispatch = useDispatch()
     const { id } = useParams();
+
+    // Variables for creating lines behind comments
     const rightDiv = document.getElementById('commentsDiv');
     const lineDiv = document.getElementsByClassName('lineClass');
     let divHeight = '0px';
     let lines = [];
 
+    // Update line height on every screen update
     useEffect(() => {
         if (rightDiv && lineDiv) {
             divHeight = window.getComputedStyle(rightDiv).height;
-            console.log(lineDiv);
+
             for (const e of lineDiv) {
                 e.style.height = divHeight
             }
-
-            //lineDiv.map((e) => {e.style.height = divHeight});
         };
     });
 
-    for (let i = 0; i < 7; i++) {
+    // Create array of objects for lines
+    for (let i = 0; i < 9; i++) {
         const margin = i * 1.2
         let line = (<div className={`${styles.lines} lineClass`} style={{ marginLeft: `${margin}em` }} key={i}></div>);
         lines.push(line);
     }
 
-    
+    // Convert flattened comments array to react elements
     function iterateComments(arr) {
         return arr.map((element) => {
             if (element === undefined || element === null) return;
@@ -51,6 +53,7 @@ export default function CommentsList() {
         });
     };
     
+    // Load more comments click handler
     async function loadMore(arr) {
         let length = 100;
         
@@ -68,12 +71,11 @@ export default function CommentsList() {
 
     return (
         <>
-            {/*<div className={`${styles.lines} lineClass`} style={{ height: divHeight }}></div>*/}
-            
+            {lines}
             <div id='commentsDiv'>
                 {iterateComments(comments.comments)}
             </div>
-            <div>
+            <div className={styles.buttonDiv}>
                 {comments.hasMore ? <button onClick={() => loadMore(comments.moreComments)}>Load more comments</button> : <></>}
                 <a
                     href={'https://redd.it/' + id}

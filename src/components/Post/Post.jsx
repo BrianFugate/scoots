@@ -14,8 +14,8 @@ export default function Post(props) {
             <div className={styles.headingDiv}>
                 <div className={styles.infoDiv}>
                     <div className={styles.userDiv}>
-                        <div className={styles.title}>u/{props.author}</div>
-                        <div className={styles.title}>{props.sub}</div>
+                        <div className={styles.user}>u/{props.author}</div>
+                        <div className={styles.user}>{props.sub}</div>
                     </div>
                     <Link to={`/ViewPost/${props.id}`} className={styles.title}>{props.title}</Link>
                 </div>
