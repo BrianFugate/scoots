@@ -47,7 +47,9 @@ export default function ViewPost() {
                             : false}
                         preview={Object.hasOwn(post.data, 'preview') ? post.data.preview.images[0].source.url : null}
                         text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}
-                        id={post.data.id} />
+                        id={post.data.id}
+                        redditMedia={post.data.is_reddit_media_domain}
+                        url={post.data.url} />
                 </div>
                 <div className={styles.rightDiv} id='rightDiv'>
                     <CommentsList />

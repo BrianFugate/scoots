@@ -58,6 +58,7 @@ export default function Post(props) {
                     </EmailShareButton>
                 </div>
             </div>
+            {props.redditMedia ? <></> : <a href={props.url} target='_blank'>{props.url}</a>}
             {props.video === null
                 ? <img style={props.preview === null 
                             ? {display: 'none'} 
