@@ -1,5 +1,8 @@
 import React from "react";
-import styles from "./Post.module.css";
+import VideoJS from "../../utils/VideoJS.jsx";
+import videojs from "video.js";
+import 'video.js/dist/video-js.css';
+import styles from "./Post.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
 import { Link } from "react-router-dom";
@@ -7,7 +10,31 @@ import { Link } from "react-router-dom";
 import defaultImg from "../../assets/loader-9342_512.gif";
 
 export default function Post(props) {
+    const playerRef = React.useRef(null);
 
+    const videoJsOptions = {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [{
+          src: props.video,
+          type: 'application/x-mpegURL'
+        }]
+      };
+    
+      const handlePlayerReady = (player) => {
+        playerRef.current = player;
+    
+        // You can handle player events here, for example:
+        player.on('waiting', () => {
+          videojs.log('player is waiting');
+        });
+    
+        player.on('dispose', () => {
+          videojs.log('player will dispose');
+        });
+      };
 
     return (
         <div className={styles.outerDiv}>
@@ -26,14 +53,18 @@ export default function Post(props) {
                     <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
                 </div>
             </div>
-            <img style={props.preview === null 
-                        ? {display: 'none'} 
-                        : {display: 'block'}} 
-                className={styles.postImg} 
-                src={props.preview === 'default'
-                        ? defaultImg
-                        : props.preview} 
-                alt='Post image missing' />
+            {props.video === null
+                ? <img style={props.preview === null 
+                            ? {display: 'none'} 
+                            : {display: 'block'}} 
+                    className={styles.postImg} 
+                    src={props.preview === 'default'
+                            ? defaultImg
+                            : props.preview} 
+                    alt='Post image missing' />
+                : <div className={styles.videoDiv} style={props.videoLandscape === true ? {width: '95%'} : {width: '55%'}}>
+                    <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+                </div>}
             <p style={props.text === null ? {display: 'none'} : {display: 'block'}}>{props.text}</p>
         </div>
     );

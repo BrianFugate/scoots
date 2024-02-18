@@ -40,6 +40,11 @@ export default function ViewPost() {
                         author={post.data.author}
                         sub={post.data.subreddit_name_prefixed}
                         title={post.data.title}
+                        video={post.data.is_video ? post.data.media.reddit_video.hls_url : null}
+                        videoLandscape={post.data.is_video 
+                            ? post.data.media.reddit_video.height > post.data.media.reddit_video.width
+                                ? false : true
+                            : false}
                         preview={Object.hasOwn(post.data, 'preview') ? post.data.preview.images[0].source.url : null}
                         text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}
                         id={post.data.id} />

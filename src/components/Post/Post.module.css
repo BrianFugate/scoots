@@ -70,3 +70,9 @@ p {
     margin: 1em 0.5em;
     overflow-wrap: anywhere;
 }
+
+.videoDiv {
+    width: 55%;
+    object-fit: contain;
+    margin-bottom: 0.5em;
+}

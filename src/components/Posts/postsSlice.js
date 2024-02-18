@@ -2,23 +2,32 @@ import { createSlice } from "@reduxjs/toolkit";
 import post from "../../api/Reddit/defaultPost.json"
 
 const initialState = {
-    apiData: {data: {children: [post]}}
+    posts: [post],
+    after: ''
 };
 
 const postsSlice = createSlice ({
     name: 'posts',
     initialState: initialState,
     reducers: {
-        refreshApiData(state, action) {
-            return {...state, apiData: {...action.payload}};
-        }, 
+        refreshPosts(state, action) {
+            return {...state, posts: [...action.payload]};
+        },
+
+        setAfter(state, action) {
+            return {...state, after: action.payload};
+        },
 
         resetInitialPost() {
             return initialState;
+        },
+
+        addPosts(state, action) {
+            return {...state, posts: [...state.posts, ...action.payload]};
         }
     }
 });
 
 export const selectPosts = state => state.posts;
-export const { refreshApiData, resetInitialPost } = postsSlice.actions;
+export const { refreshPosts, setAfter, resetInitialPost, addPosts } = postsSlice.actions;
 export default postsSlice.reducer;

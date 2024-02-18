@@ -2,19 +2,28 @@ import React from "react";
 import redditLogo from '../../assets/reddit-lockup-ondark.svg';
 import scootsLogo from '../../assets/scoots-logo.png';
 import styles from './Header.module.css';
-import { useNavigate } from "react-router-dom";
-import { setActive } from "../Category/categorySlice.js";
+import { useNavigate, useLocation } from "react-router-dom";
+import { selectCategory, setActive } from "../Category/categorySlice.js";
 import { clearText } from "../Search/searchSlice.js";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Header() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const location = useLocation();
+    const category = useSelector(selectCategory).activeCategory;
 
     function handleClick() {
+        const alreadyHot = category === 'Hot' ? true : false;
+
         dispatch(setActive('Hot'));
         dispatch(clearText());
-        navigate('/');
+
+        if (alreadyHot && location.pathname === '/') {
+            navigate(0);
+        } else {
+            navigate('/');
+        };        
     }
 
     return (
