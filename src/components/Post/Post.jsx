@@ -5,6 +5,7 @@ import 'video.js/dist/video-js.css';
 import styles from "./Post.module.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComments, faShareFromSquare } from '@fortawesome/free-regular-svg-icons';
+import { EmailShareButton } from "react-share";
 import { Link } from "react-router-dom";
 // GIF by Ekaterine Kantaria from https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=animation&utm_content=9342
 import defaultImg from "../../assets/loader-9342_512.gif";
@@ -49,8 +50,12 @@ export default function Post(props) {
                 <div className={styles.iconDiv}>
                     <Link to={`/ViewPost/${props.id}`} className={styles.title}>
                         <FontAwesomeIcon className={styles.icon} icon={faComments} />
-                    </Link>                    
-                    <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
+                    </Link>  
+                    <EmailShareButton url={'https://redd.it/' + props.id}
+                                        subject='Check out this Reddit post'
+                                        body='Follow this link to view a reddit post I enjoyed:'>                  
+                        <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
+                    </EmailShareButton>
                 </div>
             </div>
             {props.video === null
