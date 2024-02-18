@@ -1,7 +1,8 @@
-import React from "react";
+import React, { lazy } from "react";
 import styles from "./Explore.module.css";
-import Search from "../../components/Search/Search.jsx";
-import Posts from "../../components/Posts/Posts.jsx";
+
+const Search = lazy(() => import("../../components/Search/Search.jsx"));
+const Posts = lazy(() => import("../../components/Posts/Posts.jsx"));
 
 export default function Explore() {
     return (
