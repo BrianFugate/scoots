@@ -73,7 +73,13 @@ export default function Posts() {
                         ? post.data.media.reddit_video.height > post.data.media.reddit_video.width
                             ? false : true
                         : false}
-                    preview={Object.hasOwn(post.data, 'preview') ? post.data.preview.images[0].source.url : null}
+                    preview={Object.hasOwn(post.data, 'preview') 
+                            ? Object.hasOwn(post.data.preview.images[0], 'resolutions') 
+                                ? post.data.preview.images[0].resolutions.length >= 4
+                                    ? post.data.preview.images[0].resolutions[3].url
+                                    : post.data.preview.images[0].source.url
+                                : post.data.preview.images[0].source.url 
+                            : null}
                     text={Object.hasOwn(post.data, 'selftext') ? post.data.selftext : null}
                     id={post.data.id}
                     redditMedia={post.data.is_reddit_media_domain}
