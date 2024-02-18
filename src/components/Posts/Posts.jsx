@@ -78,7 +78,11 @@ export default function Posts() {
                     id={post.data.id}
                     redditMedia={post.data.is_reddit_media_domain}
                     url={post.data.url}/>)}
-                <button onClick={() => loadMore(postData.after)}>Load more posts</button>
+                <button onClick={() => loadMore(postData.after)}
+                        id='morePosts'
+                        aria-label='Load more posts'>
+                    Load more posts
+                </button>
         </div>
     );
 };                                 

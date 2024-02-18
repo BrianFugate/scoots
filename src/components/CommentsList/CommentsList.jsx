@@ -76,7 +76,12 @@ export default function CommentsList() {
                 {iterateComments(comments.comments)}
             </div>
             <div className={styles.buttonDiv}>
-                {comments.hasMore ? <button onClick={() => loadMore(comments.moreComments)}>Load more comments</button> : <></>}
+                {comments.hasMore ? <button onClick={() => loadMore(comments.moreComments)}
+                                            id='loadMore'
+                                            aria-label='Load more comments'>
+                                    Load more comments
+                                    </button> 
+                                : <></>}
                 <a
                     href={'https://redd.it/' + id}
                     target='_blank'
