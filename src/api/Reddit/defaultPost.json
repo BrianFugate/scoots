@@ -1,0 +1,18 @@
+{
+    "data": {
+        "title": "scoots is loading your selected post from Reddit",
+        "subreddit_name_prefixed": "scoots",
+        "name": "",
+        "preview": {
+            "images": [
+                {
+                    "source": {
+                        "url": "default"
+                    }
+                }
+            ]
+        },
+        "id": "",
+        "author": "scoots-app"
+    }
+}
