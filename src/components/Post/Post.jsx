@@ -66,7 +66,7 @@ export default function Post(props) {
                             : {display: 'block'}} 
                     className={styles.postImg} 
                     loading='lazy'
-                    height='450px'
+                    height='800px'
                     width='800px'
                     src={props.preview === 'default'
                             ? defaultImg

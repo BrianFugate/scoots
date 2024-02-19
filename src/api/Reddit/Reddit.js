@@ -17,6 +17,7 @@ function generateRandomString(length) {
 
 const Reddit = {
     async getToken() {
+      try {
         const response = await fetch('https://www.reddit.com/api/v1/access_token', {
           method: 'POST',
           body: new URLSearchParams({
@@ -27,8 +28,15 @@ const Reddit = {
             'Authorization': 'Basic ' + btoa(clientId + ':' + '')
           },
         });
+
+        if (!response.ok) {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
         
         return await response.json();
+      } catch(error) {
+        console.log('There was an error', error);
+      }
       },
 
       async getPosts(endpoint, args) {
@@ -37,12 +45,20 @@ const Reddit = {
             token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
         };
 
-        const response = await fetch(`https://oauth.reddit.com/${endpoint}?raw_json=1${args}`, {
-            method: 'GET',
-            headers: { 'Authorization': 'Bearer ' + token.token },
+        try {
+          const response = await fetch(`https://oauth.reddit.com/${endpoint}?raw_json=1${args}`, {
+              method: 'GET',
+              headers: { 'Authorization': 'Bearer ' + token.token },
           });
-        
-          return await response.json();
+
+          if (!response.ok) {
+            throw new Error(`${response.status} ${response.statusText}`);
+          }
+          
+          return await response.json();          
+        } catch(error) {
+          console.log('There was an error', error);
+        }
     },
 
     async getComments(post) {
@@ -51,16 +67,24 @@ const Reddit = {
           token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
       };
 
-      const response = await fetch(`https://oauth.reddit.com/comments/${post}?raw_json=1`, {
-          method: 'GET',
-          headers: { 'Authorization': 'Bearer ' + token.token },
+      try {
+        const response = await fetch(`https://oauth.reddit.com/comments/${post}?raw_json=1`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token.token },
         });
-      
-      const comments = await response.json();
-      const flatComments = Parser.flatten(comments[1].data.children);
-      comments[1].data.children.splice(0, Infinity, ...flatComments);
+        
+        if (!response.ok) {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
 
-      return comments;
+        const comments = await response.json();
+        const flatComments = Parser.flatten(comments[1].data.children);
+        comments[1].data.children.splice(0, Infinity, ...flatComments);
+
+        return comments;
+      } catch(error) {
+        console.log('There was an error', error);
+      }        
     },
 
     async getMoreComments(post, comments) {
@@ -69,12 +93,18 @@ const Reddit = {
           token = {token: tokenResponse.access_token, expireTime: Date.now() + (tokenResponse.expires_in * 1000)};
       };
 
-      const response = await fetch(`https://oauth.reddit.com/api/morechildren/?api_type=json&children=${comments}&depth=6&link_id=${post}&raw_json=1`, {
-          method: 'GET',
-          headers: { 'Authorization': 'Bearer ' + token.token },
+      try {
+        const response = await fetch(`https://oauth.reddit.com/api/morechildren/?api_type=json&children=${comments}&depth=6&link_id=${post}&raw_json=1`, {
+            method: 'GET',
+            headers: { 'Authorization': 'Bearer ' + token.token },
         });
-      
+        if (!response.ok) {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
         return await response.json();
+      } catch(error) {
+        console.log('There was an error', error);
+      }      
     }
 };
 
