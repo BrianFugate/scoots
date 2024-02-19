@@ -17,3 +17,9 @@
 .button:hover {
     cursor: pointer;
 }
+
+@media (orientation: portrait) {
+    .button {
+        margin: 0 1em;
+    }
+}

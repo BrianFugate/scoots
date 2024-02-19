@@ -45,15 +45,16 @@ export default function Post(props) {
                         <div className={styles.user}>u/{props.author}</div>
                         <div className={styles.user}>{props.sub}</div>
                     </div>
-                    <Link to={`/ViewPost/${props.id}`} className={styles.title}>{props.title}</Link>
+                    <Link to={`/ViewPost/${props.id}`} className={styles.title} aria-label='View post comments'>{props.title}</Link>
                 </div>
                 <div className={styles.iconDiv}>
-                    <Link to={`/ViewPost/${props.id}`} className={styles.title}>
+                    <Link to={`/ViewPost/${props.id}`} className={styles.title} aria-label='View post comments'>
                         <FontAwesomeIcon className={styles.icon} icon={faComments} />
                     </Link>  
                     <EmailShareButton url={'https://redd.it/' + props.id}
                                         subject='Check out this Reddit post'
-                                        body='Follow this link to view a reddit post I enjoyed:'>                  
+                                        body='Follow this link to view a reddit post I enjoyed:'
+                                        aria-label='Share by email button'>                  
                         <FontAwesomeIcon className={styles.icon} icon={faShareFromSquare} />
                     </EmailShareButton>
                 </div>
