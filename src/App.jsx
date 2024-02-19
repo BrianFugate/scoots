@@ -1,11 +1,11 @@
-import React from 'react'
-import Explore from './pages/Explore/Expore.jsx'
-import Root from './components/Root/Root.jsx'
+import React, { lazy } from 'react'
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom'
-import ViewPost from './pages/ViewPost/ViewPost.jsx';
-import RootBoundary from './error-routes/RootBoundry.jsx';
-import ExploreBoundry from './error-routes/ExploreBoundry.jsx';
-import ViewPostBoundry from './error-routes/ViewPostBoundry.jsx';
+const Explore = lazy(() => import('./pages/Explore/Expore.jsx'))
+const Root = lazy(() => import('./components/Root/Root.jsx'))
+const ViewPost = lazy(() => import('./pages/ViewPost/ViewPost.jsx'))
+const RootBoundary = lazy(() => import('./error-routes/RootBoundry.jsx'))
+const ExploreBoundry = lazy(() => import('./error-routes/ExploreBoundry.jsx'))
+const ViewPostBoundry = lazy(() => import('./error-routes/ViewPostBoundry.jsx'))
 
 // Create router with JSX Route elements
 const appRouter = createBrowserRouter(createRoutesFromElements(
@@ -20,6 +20,8 @@ const appRouter = createBrowserRouter(createRoutesFromElements(
 
 export default function App() {
   return (
-    <RouterProvider router={appRouter}/>
+    <React.Suspense fallback={<div>Loading</div>}>
+      <RouterProvider router={appRouter}/>
+    </React.Suspense>
   )
 }

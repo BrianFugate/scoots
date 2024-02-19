@@ -10,7 +10,7 @@
     background-repeat: no-repeat;
     background-position-y: bottom;
     padding: 0 0 0.5em 0;
-    margin: 0 1.5em;
+    margin: 0.2em 1.5em;
     font-size: 1em;
 }
 
@@ -20,6 +20,6 @@
 
 @media (orientation: portrait) {
     .button {
-        margin: 0 1em;
+        margin: 0.5em 1em;
     }
 }

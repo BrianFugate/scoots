@@ -1,13 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, lazy } from "react";
 import styles from "./ViewPost.module.css";
-import SearchBar from "../../components/Search/Search.jsx";
-import Post from "../../components/Post/Post.jsx";
-import CommentsList from "../../components/CommentsList/CommentsList.jsx";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { selectViewPost, setPost, setComments, setMoreComments, setHasMore, resetInitial } from "./viewPostSlice.js";
 import { Reddit } from "../../api/Reddit/Reddit.js";
 
+const SearchBar = lazy(() => import("../../components/Search/Search.jsx"));
+const Post = lazy(() => import("../../components/Post/Post.jsx"));
+const CommentsList = lazy(() => import("../../components/CommentsList/CommentsList.jsx"));
 
 export default function ViewPost() {
     const currPost = useSelector(selectViewPost);
